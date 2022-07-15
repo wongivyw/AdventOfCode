@@ -9,6 +9,25 @@ import day4.Board;
 import day5.KeyPair;
 
 public class File {
+	
+	public static ArrayList<ArrayList<Integer>> openFileTo2DIntArrayList(String filename) throws IOException {
+		ArrayList<ArrayList<Integer>> result = new ArrayList<ArrayList<Integer>>();
+
+	    FileReader fileReader = new FileReader(filename);
+	    try (BufferedReader bufferedReader = new BufferedReader(fileReader)) {
+	      String line;
+	      while((line = bufferedReader.readLine()) != null) {
+	    	  ArrayList<Integer> subResult = new ArrayList<Integer>();
+	    		for (int i = 0; i < line.length(); i++) {
+	    			char number = line.charAt(i);
+	    			subResult.add(Integer.parseInt(String.valueOf(number)));
+	    		}
+	    	  result.add(subResult);
+	      }
+	    }
+	    return result;
+	}
+	
 	public static ArrayList<ArrayList<String>> openFileToStringWithDelim(String filename) throws IOException {
 		ArrayList<ArrayList<String>> result = new ArrayList<ArrayList<String>>();
 	    FileReader fileReader = new FileReader(filename);

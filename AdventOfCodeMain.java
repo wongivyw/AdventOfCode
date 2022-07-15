@@ -10,6 +10,7 @@ import day5.KeyPair;
 import day6.Lanternfish;
 import day7.TreacheryOfWhales;
 import day8.SevenSegmentSearch;
+import day9.HeightMap;
 import util.File;
 import util.Printer;
 
@@ -86,14 +87,23 @@ public class AdventOfCodeMain {
     	System.out.println("Sum of output values: " + sss.sum());
 	}
 
+	public static void day9() throws Exception{
+		ArrayList<ArrayList<Integer>> input9 = File.openFileTo2DIntArrayList("day9/input_test.txt");
+    	HeightMap hm = new HeightMap(input9);
+    	System.out.println("*** Day 9 ***");
+//    	System.out.println("Risk Level: " + hm.getRiskLevel()); //part 1
+    	hm.printAdvancedMap();
+	}
+	
     public static void main(String[] args) throws Exception {
 //    	day1();
 //    	day2();
 //    	day3();
 //    	day4();
 //    	day5();  
-    	day6(); //part 2 incomplete
+//    	day6(); //part 2 incomplete
 //    	day7();
 //    	day8(); //part 2 incomplete
+    	day9();
     }
 }
