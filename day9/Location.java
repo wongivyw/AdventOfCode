@@ -3,9 +3,9 @@ package day9;
 public class Location {
 	private int xPos, yPos, height;
 	private int up, down, left, right;
-	boolean isLowPoint = false;
+	private boolean isLowPoint = false;
 	
-	boolean isSearched = false;
+	private boolean isSearched = false;
 
 	public Location(int xPos, int yPos, int height, int up, int down, int left, int right) {
 		this.xPos = xPos;
@@ -32,6 +32,8 @@ public class Location {
 	public boolean isLowPoint() {return isLowPoint;}
 	
 	public void searched() {isSearched = true;}
+	public boolean isSearched() {return isSearched;}
+	public void resetSearched() {isSearched = false;}
 	
 	
 	//printer functions

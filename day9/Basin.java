@@ -5,9 +5,9 @@ import java.util.ArrayList;
 public class Basin {
 	ArrayList<Location> flow;
 
-	public Basin(Location l) {
+	public Basin() {
 		flow = new ArrayList<Location>();
-		flow.add(l);
+//		flow.add(l);
 	}
 	
 	public void add(Location l) {

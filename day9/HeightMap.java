@@ -16,8 +16,6 @@ public class HeightMap {
 	ArrayList<Location> advancedLowPoints;
 	ArrayList<Basin> basins;
 
-	
-
 	public HeightMap(ArrayList<ArrayList<Integer>> input) {
 		this.input = input;
 		advancedLowPoints = new ArrayList<Location>();
@@ -32,73 +30,86 @@ public class HeightMap {
 		advancedHeightMap = inputToLocations();
 		basins = findBasins(advancedLowPoints);
 		
-		
+		//part 2 incorrect answers: 490176
+			//to low: 471653
+			//to high: 1390620
 	}
 	
 	//Part 2--------------------------------------------------------------------
 	
-	private Basin largestBasin() {
-		return null;
+	public int multiplyLargestBasins(int num) {
+		int total = 1;
+		ArrayList<Basin> copyOfBasins = basins;
+		
+		for (int i = 0; i < num; i++) {
+			int index = findLargestBasin(copyOfBasins);
+			total *= copyOfBasins.get(index).getSize();
+			System.out.println("size of basin at index " + index + " :" + copyOfBasins.get(index).getSize());
+			copyOfBasins.remove(index);
+		}
+		
+		return total;
+	}
+	
+	private int findLargestBasin(ArrayList<Basin> basins) {
+		int indexOfLargest = 0;
+		for (int i = 0; i < basins.size(); i++) {
+			if (basins.get(i).getSize() > basins.get(indexOfLargest).getSize()) {
+				indexOfLargest = i;
+			}
+		}
+		return indexOfLargest;
 	}
 	
 	private ArrayList<Basin> findBasins(ArrayList<Location> lowPoints) {
 		ArrayList<Basin> basins = new ArrayList<Basin>();
 		//for each low point, create a new basin
 		for (Location loc : lowPoints) {
-			Basin b = new Basin(loc);
-	
-			boolean newAdjs = true;
-			while (newAdjs) {
-				newAdjs = basinSearch(b);
-			}
-		
+			Basin b = new Basin();
+			b.add(loc);
+//			resetSearchedOnHeightMap();
+			b = adjacentCheck(loc, b);
+			
 			basins.add(b);
 		}
-		
-		//start at the low point
-			//store x and y positions
-			//store adjacent numbers
-		//if adjacent numbers are the same or one higher, add to basin
-		//check adjacent numbers for each new number added to basin 
-		//repeat until no new numbers are added to basin
-		
 		return basins;
 		
 	}
 	
-	private boolean basinSearch(Basin b) {
-		boolean newAdjsFound = false;
+	
+	private Basin adjacentCheck(Location loc, Basin b) {
 		
-		for (Location loc : b.getFlow() ) {
-			int height = loc.getHeight();
-			int up = loc.getUp();
-			int down = loc.getDown();
-			int left = loc.getLeft();
-			int right = loc.getRight();
-			
-			if (up >= height) {
-				newAdjsFound = true;
-//				b.add(up)); //add up in the type of Location, not just the number
-			}	
-			
-			if (down >= height) {
-				newAdjsFound = true;
-//				b.add(down)); //add down in the type of Location, not just the number
-			}
-			
-			if (left >= height) {
-				newAdjsFound = true;
-//				b.add(left)); //add left in the type of Location, not just the number
-			}
-			
-			if (right >= height) {
-				newAdjsFound = true;
-//				b.add(right)); //add down in the type of Location, not just the number
-			}
-			
-			loc.searched();
+		if (loc.isSearched()) {
+			return b;
 		}
-		return newAdjsFound;
+		//check up
+		if ((loc.getUp() != 9) && (loc.getUp() == loc.getHeight()+1))
+			adjacentCheck(advancedHeightMap.get(loc.getXPos()-1).get(loc.getYPos()),b);
+		
+		//check down
+		if ((loc.getDown() != 9) && (loc.getDown() == loc.getHeight()+1))
+			adjacentCheck(advancedHeightMap.get(loc.getXPos()+1).get(loc.getYPos()),b);
+		
+		//check left
+		if ((loc.getLeft() != 9) && (loc.getLeft() == loc.getHeight()+1))
+			adjacentCheck(advancedHeightMap.get(loc.getXPos()).get(loc.getYPos()-1),b);
+		
+		//check right
+		if ((loc.getRight() != 9) && (loc.getRight() == loc.getHeight()+1)) {
+			adjacentCheck(advancedHeightMap.get(loc.getXPos()).get(loc.getYPos()+1),b);
+		}
+		
+		loc.searched();
+		b.add(loc);
+		return b;
+	}
+	
+	private void resetSearchedOnHeightMap() {
+		for (ArrayList<Location> ahm : advancedHeightMap) {
+			for (Location loc : ahm) {
+				loc.resetSearched();
+			}
+		}
 	}
 	
 	private ArrayList<ArrayList<Location>> inputToLocations() {
@@ -213,6 +224,13 @@ public class HeightMap {
 			}
 			System.out.println();
 		}
+	}
+	
+	public void printBasinSizes() {
+		for (int i = 0 ; i < basins.size(); i++) {
+			System.out.println("Basin " + (i+1) + " size: " + basins.get(i).getSize());
+		}
+		
 	}
 	
 }

@@ -1,6 +1,7 @@
 import java.util.ArrayList;
 
 import day1.SonarSweep;
+import day10.SyntaxScoring;
 import day2.Dive;
 import day3.BinaryDiagnostic;
 import day4.Board;
@@ -88,11 +89,19 @@ public class AdventOfCodeMain {
 	}
 
 	public static void day9() throws Exception{
-		ArrayList<ArrayList<Integer>> input9 = File.openFileTo2DIntArrayList("day9/input_test.txt");
+		ArrayList<ArrayList<Integer>> input9 = File.openFileTo2DIntArrayList("day9/input.txt");
     	HeightMap hm = new HeightMap(input9);
     	System.out.println("*** Day 9 ***");
 //    	System.out.println("Risk Level: " + hm.getRiskLevel()); //part 1
-    	hm.printAdvancedMap();
+    	System.out.println("3 largest basins multiplied: " + hm.multiplyLargestBasins(3)); //part 2
+	}
+	
+	public static void day10() throws Exception{
+		ArrayList<String> input10 = File.openFileToString("day10/input_test.txt");
+    	SyntaxScoring ss = new SyntaxScoring(input10);
+    	System.out.println("*** Day 10 ***");
+    	ss.printCorruptedLines();
+//    	Printer.arrayListString(input10);
 	}
 	
     public static void main(String[] args) throws Exception {
@@ -104,6 +113,7 @@ public class AdventOfCodeMain {
 //    	day6(); //part 2 incomplete
 //    	day7();
 //    	day8(); //part 2 incomplete
-    	day9();
+//    	day9(); //part 2 incomplete
+    	day10();
     }
 }
