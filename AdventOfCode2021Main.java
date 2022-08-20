@@ -102,29 +102,30 @@ public class AdventOfCode2021Main {
 		ArrayList<String> input10 = File.openFileToString("year2021_day10/input.txt");
     	SyntaxScoring ss = new SyntaxScoring(input10);
     	System.out.println("*** Day 10 ***");
-    	ss.printTotalSyntaxError(); //part 1 answer
+    	ss.printTotalSyntaxError(); //part 1
     	ss.printMedianRepairSequencesScore(); //part 2
     	System.out.println();
 	}
 	public static void day11() throws Exception{
-		ArrayList<ArrayList<Integer>> input11 = File.openFileTo2DIntArrayList("year2021_day11/input_test.txt");
+		ArrayList<ArrayList<Integer>> input11 = File.openFileTo2DIntArrayList("year2021_day11/input_test2.txt");
     	DumboOctopus dos = new DumboOctopus(input11);
     	System.out.println("*** Day 11 ***");
-//    	dos.(); //part 1 answer
+    	System.out.println("Total flashes: " + dos.getTotalFlashes()); //part 1
 //    	dos.(); //part 2
     	System.out.println();
 	}
 	
     public static void main(String[] args) throws Exception {
-    	day1();
-    	day2();
-    	day3();
-    	day4();
-    	day5();  
-    	day6(); //part 2 incomplete
-    	day7();
-    	day8(); //part 2 incomplete
-    	day9(); //part 2 incomplete
-    	day10(); //part 2 incomplete
+//    	day1();
+//    	day2();
+//    	day3();
+//    	day4();
+//    	day5();  
+//    	day6(); //part 2 incomplete
+//    	day7();
+//    	day8(); //part 2 incomplete
+//    	day9(); //part 2 incomplete
+//    	day10(); //part 2 incomplete
+    	day11();
     }
 }
