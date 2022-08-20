@@ -97,10 +97,12 @@ public class AdventOfCodeMain {
 	}
 	
 	public static void day10() throws Exception{
-		ArrayList<String> input10 = File.openFileToString("day10/input_test.txt");
+		ArrayList<String> input10 = File.openFileToString("day10/input.txt");
     	SyntaxScoring ss = new SyntaxScoring(input10);
     	System.out.println("*** Day 10 ***");
-    	ss.printCorruptedLines();
+//    	ss.printTotalSyntaxError(); //part 1 answer
+    	ss.printIncompleteLines();
+    	ss.printMedianRepairSequencesScore();
 //    	Printer.arrayListString(input10);
 	}
 	
